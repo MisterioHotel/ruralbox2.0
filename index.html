@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>RuralBox</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f5f3ef;
+    color: #2f3e2f;
+}
+
+/* HEADER */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background: rgba(255,255,255,0.9);
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo img:first-child {
+    width: 40px;
+}
+
+.logo img:last-child {
+    height: 30px;
+}
+
+nav a {
+    margin: 0 15px;
+    cursor: pointer;
+}
+
+/* SECCIONES */
+section {
+    display: none;
+    padding: 120px 40px 60px;
+    min-height: 100vh;
+    animation: fade 0.6s ease;
+}
+
+section.active {
+    display: block;
+}
+
+@keyframes fade {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+h1 {
+    text-align: center;
+}
+
+/* CARDS */
+.flex {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    margin: 15px;
+    border-radius: 16px;
+    width: 250px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.03);
+}
+
+/* BOTONES */
+button {
+    background: #c46a3d;
+    border: none;
+    padding: 10px 15px;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/* MODAL */
+.modal {
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,0.6);
+    display:none;
+    justify-content:center;
+    align-items:center;
+}
+
+.modal-content {
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    max-width:400px;
+    text-align:center;
+}
+
+.audio-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        <img src="https://i.imgur.com/7vYurs1.png">
+        <img src="https://i.imgur.com/k6TiRYo.png">
+    </div>
+
+    <nav>
+        <a onclick="showSection('experiencias')">Experiencias</a>
+        <a onclick="showSection('quienes')">¿Quiénes somos?</a>
+        <a onclick="showSection('regala')">Regala</a>
+        <a onclick="showSection('contacto')">Contacto</a>
+    </nav>
+</header>
+
+<audio id="bgAudio" loop>
+<source src="https://ia600808.us.archive.org/0/items/short-10-min-nature-sounds-meditation-relaxing-forest-morning-birds-chirping-calm-sleeping-sound-320/Short_10_Min_Nature_Sounds_Meditation_-_Relaxing_Forest_Morning_Birds_Chirping_-_Calm_Sleeping_Sound-320.mp3">
+</audio>
+
+<button class="audio-btn" onclick="toggleAudio()">🌿</button>
+
+<!-- EXPERIENCIAS -->
+<section id="experiencias" class="active">
+    <h1>Experiencias</h1>
+
+    <div class="flex">
+        <div class="card" onclick="openModal('Aceite en Jaén', 'Visita una almazara tradicional, aprende el proceso y realiza una cata guiada.')">
+            <h3>Aceite en Jaén</h3>
+        </div>
+
+        <div class="card" onclick="openModal('Ruta en Asturias', 'Recorre senderos naturales, conecta con la naturaleza y descubre pueblos escondidos.')">
+            <h3>Ruta en Asturias</h3>
+        </div>
+
+        <div class="card" onclick="openModal('Cerámica artesanal', 'Crea tus propias piezas con técnicas tradicionales en un taller rural.')">
+            <h3>Cerámica</h3>
+        </div>
+    </div>
+</section>
+
+<!-- QUIENES SOMOS -->
+<section id="quienes">
+    <h1>Quiénes somos</h1>
+
+    <p style="text-align:center; max-width:600px; margin:auto;">
+        RuralBox conecta a las personas con experiencias auténticas en pueblos rurales, apoyando la economía local y fomentando un turismo más consciente.
+    </p>
+
+    <h2 style="text-align:center;">Valores</h2>
+    <p style="text-align:center;">
+        Sostenibilidad · Autenticidad · Cercanía · Impacto social
+    </p>
+
+    <div class="flex">
+        <div class="card">
+            <h3>Txomin</h3>
+            <p>Director e ideador</p>
+        </div>
+
+        <div class="card">
+            <h3>Jan</h3>
+            <p>Scrum Master</p>
+        </div>
+
+        <div class="card">
+            <h3>Juanma</h3>
+            <p>Operaciones y reclutamiento</p>
+        </div>
+    </div>
+</section>
+
+<!-- REGALA -->
+<section id="regala">
+    <h1>Regala RuralBox</h1>
+
+    <div class="flex">
+        <div class="card">
+            <h3>Pack cercano</h3>
+            <p>Experiencias locales</p>
+        </div>
+
+        <div class="card">
+            <h3>Escapada rural</h3>
+            <p>Experiencia + alojamiento</p>
+        </div>
+
+        <div class="card">
+            <h3>Experiencia completa</h3>
+            <p>Incluye transporte</p>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+    <h1>Atención al cliente</h1>
+
+    <div class="card" style="margin:auto;">
+        <p>Email: soporte@ruralbox.com</p>
+        <p>Teléfono: +34 600 000 000</p>
+    </div>
+</section>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <h2 id="modalTitle"></h2>
+        <p id="modalText"></p>
+        <button onclick="closeModal()">Cerrar</button>
+    </div>
+</div>
+
+<script>
+function showSection(id) {
+    document.querySelectorAll("section").forEach(sec => sec.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+}
+
+function openModal(title, text) {
+    document.getElementById("modalTitle").innerText = title;
+    document.getElementById("modalText").innerText = text;
+    document.getElementById("modal").style.display = "flex";
+}
+
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
+}
+
+function toggleAudio() {
+    let audio = document.getElementById("bgAudio");
+    audio.paused ? audio.play() : audio.pause();
+}
+</script>
+
+</body>
+</html>
